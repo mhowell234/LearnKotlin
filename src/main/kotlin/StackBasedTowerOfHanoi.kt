@@ -1,6 +1,5 @@
-fun <T> arrayDequeOfSize(size: Int) = ArrayDeque<T>(size)
-fun <T> ArrayDeque<T>.push(element: T) = addFirst(element) // returns Unit
-fun <T> ArrayDeque<T>.pop() = removeFirstOrNull() // returns T?
+fun <T> ArrayDeque<T>.push(element: T) = addFirst(element)
+fun <T> ArrayDeque<T>.pop() = removeFirstOrNull()
 
 class StackBasedTowerOfHanoi(private val stacks: Map<StackType, ArrayDeque<Int>>) {
     fun solve(num: Int) {
@@ -40,7 +39,7 @@ class StackBasedTowerOfHanoi(private val stacks: Map<StackType, ArrayDeque<Int>>
         }
 
         private fun createStacks(maxSize: Int): Map<StackType, ArrayDeque<Int>> {
-            return StackType.values().associateWith { arrayDequeOfSize(maxSize) }
+            return StackType.values().associateWith { ArrayDeque(maxSize) }
         }
 
         @JvmStatic

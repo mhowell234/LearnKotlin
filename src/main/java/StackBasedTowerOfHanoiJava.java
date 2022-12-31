@@ -6,11 +6,11 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class StackBasedTowerOfHanoi {
+public class StackBasedTowerOfHanoiJava {
 
   Map<StackType, Deque<Integer>> stacks;
 
-  public StackBasedTowerOfHanoi(Map<StackType, Deque<Integer>> stacks) {
+  public StackBasedTowerOfHanoiJava(Map<StackType, Deque<Integer>> stacks) {
     this.stacks = stacks;
   }
 
@@ -29,7 +29,7 @@ public class StackBasedTowerOfHanoi {
 
   public static void main(String[] args) {
     var size = 4;
-    var towerOfHanoi = new StackBasedTowerOfHanoi(StackBasedTowerOfHanoi.initStacks(size));
+    var towerOfHanoi = new StackBasedTowerOfHanoiJava(StackBasedTowerOfHanoiJava.initStacks(size));
 
     System.out.println("Start: " + towerOfHanoi.stacks);
     towerOfHanoi.solve(size);
