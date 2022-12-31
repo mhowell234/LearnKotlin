@@ -5,16 +5,16 @@ import java.util.stream.Stream;
 import lombok.Data;
 
 @Data
-public class QueueAsStackJava<T> {
+public class QueueUsingStackJava<T> {
 
   private final Deque<T> mainQueue;
   private final Deque<T> auxQueue;
 
-  public QueueAsStackJava() {
+  public QueueUsingStackJava() {
     this(new ArrayDeque<>(), new ArrayDeque<>());
   }
 
-  public QueueAsStackJava(final Deque<T> mainQueue, final Deque<T> auxQueue) {
+  public QueueUsingStackJava(final Deque<T> mainQueue, final Deque<T> auxQueue) {
     this.mainQueue = mainQueue;
     this.auxQueue = auxQueue;
   }
@@ -37,7 +37,7 @@ public class QueueAsStackJava<T> {
   }
 
   public static void main(String[] args) {
-    var queue = new QueueAsStackJava<String>();
+    var queue = new QueueUsingStackJava<String>();
 
     Stream.of("A", "B", "C").forEach(queue::add);
     System.out.println(queue);

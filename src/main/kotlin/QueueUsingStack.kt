@@ -1,24 +1,24 @@
-data class QueueAsStack<T> @JvmOverloads constructor(
-        private val mainQueue: ArrayDeque<T> = ArrayDeque(),
-        private val auxQueue: ArrayDeque<T> = ArrayDeque()) {
+data class QueueUsingStack<T> @JvmOverloads constructor(
+        private val mainStack: ArrayDeque<T> = ArrayDeque(),
+        private val auxStack: ArrayDeque<T> = ArrayDeque()) {
 
     fun add(element: T) {
-        mainQueue.push(element)
+        mainStack.push(element)
     }
 
     fun get(): T? {
-        if (auxQueue.isEmpty()) {
-            mainQueue.forEach { auxQueue.push(it) }
-            mainQueue.clear()
+        if (auxStack.isEmpty()) {
+            mainStack.forEach { auxStack.push(it) }
+            mainStack.clear()
         }
 
-        return auxQueue.pop()
+        return auxStack.pop()
     }
 
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            val queue = QueueAsStack<String>()
+            val queue = QueueUsingStack<String>()
 
             val items = listOf("A", "B", "C")
             items.forEach { queue.add(it) }
