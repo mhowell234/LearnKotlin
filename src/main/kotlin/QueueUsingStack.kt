@@ -21,12 +21,12 @@ data class QueueUsingStack<T> @JvmOverloads constructor(
             val queue = QueueUsingStack<String>()
 
             val items = listOf("A", "B", "C")
-            items.forEach { queue.add(it) }
+            items.forEach(queue::add)
 
             println(queue)
             for (i in items.indices) {
                 println(queue.get())
-                listOf("D", "E", "F").forEach { queue.add(it) }
+                listOf("D", "E", "F").forEach(queue::add)
                 println(queue)
             }
 
