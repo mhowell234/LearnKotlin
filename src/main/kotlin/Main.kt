@@ -1,3 +1,5 @@
+import kotlin.math.max
+
 fun main() {
 
     val fruit = arrayOf("Apple", "Banana", "Cherry", "Blueberry", "Pomegranate")
@@ -16,7 +18,5 @@ fun main() {
 
     println(getGameChoice(arrayOf("Matt", "Marnie", "TyTy", "Linda", "Preston", "Charlie", "Lexi")))
 }
-
-fun max(a: Int, b: Int) = if (a > b) a else b
 
 fun getGameChoice(optionsParam: Array<String>) = optionsParam[(Math.random() * optionsParam.size).toInt()]
