@@ -1,8 +1,8 @@
 import kotlin.math.max
 
 object ZeroOneNapSack {
-    fun napSack(records: List<Record>, totalCapacity: Double): Double {
-        val sortedRecords = records.sortedBy { it.weight }
+    fun napSack(weightedRecords: List<WeightedRecord>, totalCapacity: Double): Double {
+        val sortedRecords = weightedRecords.sortedBy { it.weight }
         val memoized = mutableMapOf<String, Double>()
         val results = napSackInternal(totalCapacity, sortedRecords, sortedRecords.size, memoized)
         println(memoized)
@@ -11,7 +11,7 @@ object ZeroOneNapSack {
 
     private fun napSackInternal(
         currentCapacity: Double,
-        records: List<Record>,
+        weightedRecords: List<WeightedRecord>,
         index: Int,
         memoized: MutableMap<String, Double>
     ): Double {
@@ -27,18 +27,18 @@ object ZeroOneNapSack {
         }
 
         // If weight is larger than capacity, skip
-        return if (records[index - 1].weight > currentCapacity) {
-            memoized[key] = napSackInternal(currentCapacity, records, index - 1, memoized)
+        return if (weightedRecords[index - 1].weight > currentCapacity) {
+            memoized[key] = napSackInternal(currentCapacity, weightedRecords, index - 1, memoized)
             return memoized[key]!!
         } else {
             memoized[key] = max(
-                records[index - 1].profit + napSackInternal(
-                    currentCapacity - records[index - 1].weight,
-                    records,
+                weightedRecords[index - 1].profit + napSackInternal(
+                    currentCapacity - weightedRecords[index - 1].weight,
+                    weightedRecords,
                     index - 1,
                     memoized
                 ),
-                napSackInternal(currentCapacity, records, index - 1, memoized)
+                napSackInternal(currentCapacity, weightedRecords, index - 1, memoized)
             )
             return memoized[key]!!
         }
@@ -48,7 +48,12 @@ object ZeroOneNapSack {
 }
 
 fun main() {
-    val records = listOf(Record(120.0, 30.0), Record(100.0, 20.0), Record(60.0, 10.0))
+    val records =
+        listOf(
+            WeightedRecordImpl("1", 120.0, 30.0),
+            WeightedRecordImpl("2", 100.0, 20.0),
+            WeightedRecordImpl("3", 60.0, 10.0)
+        )
     val totalWeight = 50.0
     println(ZeroOneNapSack.napSack(records, totalWeight))
 }
