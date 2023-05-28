@@ -1,6 +1,3 @@
-import java.util.function.Function
-import java.util.stream.Collectors
-
 object StringProblems {
 
     fun firstNonRepeatingCharNestedLoop(input: String?): Char? {
@@ -33,7 +30,7 @@ object StringProblems {
 
         val frequencies = LinkedHashMap<Char, Int>()
 
-        input.chars().forEach {
+        input.codePoints().forEach {
             if (frequencies.computeIfPresent(it.toChar()) { _, v -> v + 1 } == null) {
                 frequencies[it.toChar()] = 1
             }
@@ -61,15 +58,20 @@ object StringProblems {
     fun countDuplicateCharsGroupingBy(inputString: String): Map<Char, Int> {
         return inputString.groupingBy { it }.eachCount()
     }
+
+    fun hasOnlyDigits(inputString: String): Boolean {
+        return inputString.all { it.isDigit() }
+    }
 }
 
 fun main() {
-    setOf("aardvark", "abcdefgabce").forEach { input ->
+    setOf("aardvark", "abcdefgabce", "0123", "-0123").forEach { input ->
         setOf(
             StringProblems::countDuplicateChars,
             StringProblems::countDuplicateCharsGroupingBy,
             StringProblems::firstNonRepeatingCharNestedLoop,
-            StringProblems::firstNonRepeatingLinkedHashMap
+            StringProblems::firstNonRepeatingLinkedHashMap,
+            StringProblems::hasOnlyDigits
         ).forEach {
             println("${it.name} -> $input: ${it(input)}")
         }
