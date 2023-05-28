@@ -79,6 +79,10 @@ object StringProblems {
 
         return numVowels to numConsonants
     }
+
+    fun occurrences(inputString: String, character: Char): Int {
+        return inputString.length - inputString.replace(character.toString(), "").length
+    }
 }
 
 fun Char.isVowel(): Boolean {
@@ -104,6 +108,8 @@ fun main() {
         ).forEach {
             println("${it.name} -> $input: ${it(input)}")
         }
+
+        println("occurrences: " + StringProblems.occurrences(input, 'a'))
         println("-".repeat(20))
     }
 }
