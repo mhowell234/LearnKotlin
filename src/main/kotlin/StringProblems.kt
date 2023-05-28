@@ -83,6 +83,10 @@ object StringProblems {
     fun occurrences(inputString: String, character: Char): Int {
         return inputString.length - inputString.replace(character.toString(), "").length
     }
+
+    fun join(delimiter: Char, vararg words: String): String {
+        return words.joinToString(separator = delimiter.toString())
+    }
 }
 
 fun Char.isVowel(): Boolean {
@@ -110,6 +114,7 @@ fun main() {
         }
 
         println("occurrences: " + StringProblems.occurrences(input, 'a'))
+        println("joining: " + StringProblems.join('_', "A", "B", "C"))
         println("-".repeat(20))
     }
 }
