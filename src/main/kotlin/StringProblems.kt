@@ -62,18 +62,48 @@ object StringProblems {
     fun hasOnlyDigits(inputString: String): Boolean {
         return inputString.all { it.isDigit() }
     }
+
+    fun reverseWord(inputString: String): String {
+        return inputString.reversed()
+    }
+
+    fun reverseWords(inputString: String): List<String> {
+        return inputString.split(" ").map { reverseWord(it) }
+    }
+
+    fun vowelsAndConsonants(inputString: String): Pair<Long, Long> {
+        val lower = inputString.lowercase()
+
+        val numVowels = lower.chars().mapToObj(Int::toChar).filter(Char::isVowel).count()
+        val numConsonants = lower.chars().mapToObj(Int::toChar).filter(Char::isConsonant).count()
+
+        return numVowels to numConsonants
+    }
+}
+
+fun Char.isVowel(): Boolean {
+    return setOf("a", "e", "i", "o", "u").contains(this.lowercase())
+}
+
+fun Char.isConsonant(): Boolean {
+    return this in 'a'..'z' && !isVowel()
 }
 
 fun main() {
-    setOf("aardvark", "abcdefgabce", "0123", "-0123").forEach { input ->
+    println("-".repeat(20))
+    setOf("1 2 3 4", "12 23 34 45", "aardvark", "abcdefgabce", "0123", "-0123").forEach { input ->
         setOf(
+            StringProblems::reverseWord,
+            StringProblems::reverseWords,
             StringProblems::countDuplicateChars,
             StringProblems::countDuplicateCharsGroupingBy,
             StringProblems::firstNonRepeatingCharNestedLoop,
             StringProblems::firstNonRepeatingLinkedHashMap,
-            StringProblems::hasOnlyDigits
+            StringProblems::hasOnlyDigits,
+            StringProblems::vowelsAndConsonants
         ).forEach {
             println("${it.name} -> $input: ${it(input)}")
         }
+        println("-".repeat(20))
     }
 }
