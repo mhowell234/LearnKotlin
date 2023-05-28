@@ -1,3 +1,6 @@
+import java.util.function.Function
+import java.util.stream.Collectors
+
 object StringProblems {
 
     fun firstNonRepeatingCharNestedLoop(input: String?): Char? {
@@ -54,12 +57,17 @@ object StringProblems {
 
         return frequencies
     }
+
+    fun countDuplicateCharsGroupingBy(inputString: String): Map<Char, Int> {
+        return inputString.groupingBy { it }.eachCount()
+    }
 }
 
 fun main() {
     setOf("aardvark", "abcdefgabce").forEach { input ->
         setOf(
             StringProblems::countDuplicateChars,
+            StringProblems::countDuplicateCharsGroupingBy,
             StringProblems::firstNonRepeatingCharNestedLoop,
             StringProblems::firstNonRepeatingLinkedHashMap
         ).forEach {
