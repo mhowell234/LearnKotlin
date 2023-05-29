@@ -91,9 +91,14 @@ object StringProblems {
     }
 
     fun isPalindrome(inputString: String): Boolean {
-        return IntStream.range(0, inputString.length / 2).allMatch {
-            inputString[it] == inputString[inputString.length - it - 1]
+        val value = inputString.filterNot { it.isWhitespace() }
+        return IntStream.range(0, value.length / 2).allMatch {
+            value[it] == value[value.length - it - 1]
         }
+    }
+
+    fun sortByLength(chars: Array<String>) {
+        chars.sortBy { it.length }
     }
 
     fun mostFrequent(inputString: String): Pair<Char, Int> {
@@ -111,7 +116,17 @@ fun Char.isConsonant(): Boolean {
 
 fun main() {
     println("-".repeat(20))
-    setOf("1 2 3 4", "12 23 34 45", "aardvark", "abcdefgabce", "0123", "-0123", "madam").forEach { input ->
+    setOf(
+        "tacocat",
+        "1 2 3 4",
+        "12 23 34 45",
+        "aardvark",
+        "abcdefgabce",
+        "0123",
+        "-0123",
+        "madam",
+        "m a d a m "
+    ).forEach { input ->
         setOf(
             StringProblems::reverseWord,
             StringProblems::reverseWords,
@@ -127,8 +142,14 @@ fun main() {
             println("${it.name} -> $input: ${it(input)}")
         }
 
-        println("occurrences: " + StringProblems.occurrences(input, 'a'))
-        println("joining: " + StringProblems.join('_', "A", "B", "C"))
+        println("occurrences a: " + StringProblems.occurrences(input, 'a'))
         println("-".repeat(20))
     }
+
+    println("joining: " + StringProblems.join('_', "A", "B", "C"))
+
+    val arr = arrayOf("1234", "3333333", "234", "abc", "99999")
+    println("sortBy before: ${arr.contentToString()}")
+    StringProblems.sortByLength(arr)
+    println("sortBy after: ${arr.contentToString()}")
 }
