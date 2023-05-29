@@ -57,21 +57,13 @@ object StringProblems {
         return frequencies
     }
 
-    fun charCount(inputString: String): Map<Char, Int> {
-        return inputString.groupingBy { it }.eachCount()
-    }
+    fun charCount(inputString: String): Map<Char, Int> = inputString.groupingBy { it }.eachCount()
 
-    fun hasOnlyDigits(inputString: String): Boolean {
-        return inputString.all { it.isDigit() }
-    }
+    fun hasOnlyDigits(inputString: String): Boolean = inputString.all { it.isDigit() }
 
-    fun reverseWord(inputString: String): String {
-        return inputString.reversed()
-    }
+    fun reverseWord(inputString: String): String = inputString.reversed()
 
-    fun reverseWords(inputString: String): List<String> {
-        return inputString.split(" ").map { reverseWord(it) }
-    }
+    fun reverseWords(inputString: String): List<String> = inputString.split(" ").map { reverseWord(it) }
 
     fun vowelsAndConsonants(inputString: String): Pair<Long, Long> {
         val lower = inputString.lowercase()
@@ -82,13 +74,10 @@ object StringProblems {
         return numVowels to numConsonants
     }
 
-    fun occurrences(inputString: String, character: Char): Int {
-        return inputString.length - inputString.replace(character.toString(), "").length
-    }
+    fun occurrences(inputString: String, character: Char): Int =
+        inputString.length - inputString.replace(character.toString(), "").length
 
-    fun join(delimiter: Char, vararg words: String): String {
-        return words.joinToString(separator = delimiter.toString())
-    }
+    fun join(delimiter: Char, vararg words: String): String = words.joinToString(separator = delimiter.toString())
 
     fun isPalindrome(inputString: String): Boolean {
         val value = inputString.filterNot { it.isWhitespace() }
@@ -97,13 +86,13 @@ object StringProblems {
         }
     }
 
-    fun sortByLength(chars: Array<String>) {
-        chars.sortBy { it.length }
-    }
+    fun sortByLength(chars: Array<String>) = chars.sortBy { it.length }
 
     fun mostFrequent(inputString: String): Pair<Char, Int> {
         return charCount(inputString).maxBy { it.value }.toPair()
     }
+
+    fun isSubstring(inputString: String, possibleSub: String): Boolean = inputString.contains(possibleSub)
 }
 
 fun Char.isVowel(): Boolean {
