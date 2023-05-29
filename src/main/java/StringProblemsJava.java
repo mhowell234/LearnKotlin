@@ -2,6 +2,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 public class StringProblemsJava {
@@ -30,6 +31,11 @@ public class StringProblemsJava {
 		}
 
 		return inputString.chars().allMatch(Character::isDigit);
+	}
+
+	public boolean isPalindrome(final String inputString) {
+		return IntStream.range(0, inputString.length() / 2).allMatch(p ->
+				inputString.charAt(p) == inputString.charAt(inputString.length() - p - 1));
 	}
 
 	public static void main(String[] args) {

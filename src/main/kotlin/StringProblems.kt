@@ -1,3 +1,5 @@
+import java.util.stream.IntStream
+
 object StringProblems {
 
     fun firstNonRepeatingCharNestedLoop(input: String?): Char? {
@@ -39,7 +41,7 @@ object StringProblems {
         return frequencies.filter { it.value == 1 }.firstNotNullOfOrNull { it.key }
     }
 
-    fun countDuplicateChars(input: String?): Map<Char, Int> {
+    fun charCountUsingForEach(input: String?): Map<Char, Int> {
         if (input.isNullOrEmpty()) {
             return mapOf()
         }
@@ -55,7 +57,7 @@ object StringProblems {
         return frequencies
     }
 
-    fun countDuplicateCharsGroupingBy(inputString: String): Map<Char, Int> {
+    fun charCount(inputString: String): Map<Char, Int> {
         return inputString.groupingBy { it }.eachCount()
     }
 
@@ -87,6 +89,16 @@ object StringProblems {
     fun join(delimiter: Char, vararg words: String): String {
         return words.joinToString(separator = delimiter.toString())
     }
+
+    fun isPalindrome(inputString: String): Boolean {
+        return IntStream.range(0, inputString.length / 2).allMatch {
+            inputString[it] == inputString[inputString.length - it - 1]
+        }
+    }
+
+    fun mostFrequent(inputString: String): Pair<Char, Int> {
+        return charCount(inputString).maxBy { it.value }.toPair()
+    }
 }
 
 fun Char.isVowel(): Boolean {
@@ -99,16 +111,18 @@ fun Char.isConsonant(): Boolean {
 
 fun main() {
     println("-".repeat(20))
-    setOf("1 2 3 4", "12 23 34 45", "aardvark", "abcdefgabce", "0123", "-0123").forEach { input ->
+    setOf("1 2 3 4", "12 23 34 45", "aardvark", "abcdefgabce", "0123", "-0123", "madam").forEach { input ->
         setOf(
             StringProblems::reverseWord,
             StringProblems::reverseWords,
-            StringProblems::countDuplicateChars,
-            StringProblems::countDuplicateCharsGroupingBy,
+            StringProblems::charCountUsingForEach,
+            StringProblems::charCount,
             StringProblems::firstNonRepeatingCharNestedLoop,
             StringProblems::firstNonRepeatingLinkedHashMap,
             StringProblems::hasOnlyDigits,
-            StringProblems::vowelsAndConsonants
+            StringProblems::vowelsAndConsonants,
+            StringProblems::isPalindrome,
+            StringProblems::mostFrequent
         ).forEach {
             println("${it.name} -> $input: ${it(input)}")
         }
