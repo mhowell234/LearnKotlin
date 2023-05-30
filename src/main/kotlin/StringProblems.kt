@@ -93,6 +93,30 @@ object StringProblems {
     }
 
     fun isSubstring(inputString: String, possibleSub: String): Boolean = inputString.contains(possibleSub)
+
+    fun longestCommonPrefix(inputs: List<String>): String? {
+        if (inputs.isEmpty() || inputs[0].isEmpty()) {
+            return null
+        }
+
+        val maxLength = inputs[0].length
+
+
+        (0..maxLength).forEach { prefixLen ->
+            val currentChar = inputs[0][prefixLen]
+
+            (1..inputs.size).forEach { i ->
+
+                if (prefixLen >= inputs[]) {
+                    return 1
+                }
+
+            }
+
+        }
+
+        return inputs[0][0].toString()
+    }
 }
 
 fun Char.isVowel(): Boolean {
