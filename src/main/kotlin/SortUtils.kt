@@ -5,8 +5,8 @@ data class Data(val id: UUID, val userId: Int)
 
 object SortUtils {
 
-    // Bubble up values. Ensures per loop, the newest found largest value will be placed correctly.
-    fun <T> bubbleSort(array: Array<T>, comparator: Comparator<in T>) {
+    // Bubble up values. Ensures per loop, the newest found large value will be placed correctly.
+    fun <T> bubbleSort(array: Array<T>, comparator: Comparator<T>) {
         val length = array.size
 
         for (i in 0 until length - 1) {
@@ -18,19 +18,25 @@ object SortUtils {
         }
     }
 
-    fun <T> swap(array: Array<T>, i: Int, j: Int) {
+    // Start with 2nd element, if before is smaller swap...
+    fun <T> insertionSort(array: Array<T>, comparator: Comparator<in T>) {
+        val length = array.size
+
+        for (i in 1 until length) {
+            val item = array[i]
+            var j = i - 1;
+
+            while (j >= 0 && comparator.compare(array[j], item) > 0) {
+                array[j + 1] = array[j]
+                j -= 1
+            }
+            array[j + 1] = item
+        }
+    }
+
+    private fun <T> swap(array: Array<T>, i: Int, j: Int) {
         val tempValue = array[i]
         array[i] = array[j]
         array[j] = tempValue
     }
-}
-
-fun main() {
-    val random = Random()
-
-    val items = (0..10).map { Data(UUID.randomUUID(), random.nextInt(100_000)) }.toTypedArray()
-
-    println("Before: " + items.contentToString())
-    SortUtilsJava.bubbleSort(items, Comparator.comparing(Data::userId))
-    println("Bubble Sorted: " + items.contentToString())
 }
