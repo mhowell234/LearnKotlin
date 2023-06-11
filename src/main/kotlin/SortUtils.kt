@@ -1,4 +1,3 @@
-import java.util.Random
 import java.util.UUID
 
 data class Data(val id: UUID, val userId: Int)
@@ -6,7 +5,7 @@ data class Data(val id: UUID, val userId: Int)
 object SortUtils {
 
     // Bubble up values. Ensures per loop, the newest found large value will be placed correctly.
-    fun <T> bubbleSort(array: Array<T>, comparator: Comparator<T>) {
+    fun <T> bubbleSort(array: Array<T>, comparator: Comparator<in T>) {
         val length = array.size
 
         for (i in 0 until length - 1) {
@@ -34,9 +33,28 @@ object SortUtils {
         }
     }
 
+    fun countingSort(array: Array<Int>) {
+        val (min, max) = array.minMax()
+        val size = max - min + 1
+        val countingArray = IntArray(size)
+
+        array.forEach { countingArray[it - min]++ }
+
+        var sortedIndex = 0
+
+        countingArray.indices.forEach {
+            while (countingArray[it] > 0) {
+                array[sortedIndex++] = it + min
+                countingArray[it]--
+            }
+        }
+    }
+
     private fun <T> swap(array: Array<T>, i: Int, j: Int) {
         val tempValue = array[i]
         array[i] = array[j]
         array[j] = tempValue
     }
+
+    private fun Array<Int>.minMax(): Pair<Int, Int> = min() to max()
 }
