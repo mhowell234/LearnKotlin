@@ -7,21 +7,28 @@ internal class SortUtilsTest {
     private lateinit var input: Array<Data>
 
     @Test
-    fun `bubble sorts correctly`() {
+    fun `bubble sort - sorts correctly`() {
         givenInputData()
         whenBubbleSortByUserId()
         thenExpectedSortOrder()
     }
 
     @Test
-    fun `insertion sorts correctly`() {
+    fun `insertion sort - sorts correctly`() {
         givenInputData()
         whenInsertionSortByUserId()
         thenExpectedSortOrder()
     }
 
     @Test
-    fun `counting sorts correctly`() {
+    fun `heap sort - sorts correctly`() {
+        givenInputData()
+        whenHeapSortByUserId()
+        thenExpectedSortOrder()
+    }
+
+    @Test
+    fun `counting sort - sorts correctly`() {
         val ints = arrayOf(5, 3, 10, 1, 45, 0, 7, -5, 100, 1)
         SortUtils.countingSort(ints)
         assertContentEquals(arrayOf(-5, 0, 1, 1, 3, 5, 7, 10, 45, 100), ints)
@@ -49,6 +56,10 @@ internal class SortUtilsTest {
 
     fun whenInsertionSortByUserId() {
         SortUtils.insertionSort(input, compareBy { it.userId })
+    }
+
+    fun whenHeapSortByUserId() {
+        SortUtils.heapSort(input, compareBy { it.userId })
     }
 
     fun thenExpectedSortOrder() {
