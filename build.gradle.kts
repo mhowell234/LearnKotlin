@@ -1,6 +1,5 @@
 plugins {
     kotlin("jvm") version "1.8.21"
-    `maven-publish`
 }
 
 group = "com.mhowell234"
@@ -12,9 +11,9 @@ repositories {
 }
 
 dependencies {
-    api("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0")
-    api("com.google.guava:guava:31.1-jre")
-    api("dom4j:dom4j:1.1")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.0")
+    implementation("com.google.guava:guava:31.1-jre")
+    implementation("dom4j:dom4j:1.1")
     compileOnly("org.projectlombok:lombok:1.18.24")
     testImplementation("org.junit.jupiter:junit-jupiter-engine:5.9.0")
     testImplementation(kotlin("test"))
@@ -35,10 +34,4 @@ tasks.test {
 
 kotlin {
     jvmToolchain(19)
-}
-
-publishing {
-    publications.create<MavenPublication>("maven") {
-        from(components["java"])
-    }
 }
