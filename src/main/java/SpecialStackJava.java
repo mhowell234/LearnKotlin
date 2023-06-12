@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 import lombok.Data;
 
 @Data
-public class SpecialStackJava<T extends Comparable> {
+public class SpecialStackJava<T extends Comparable<T>> {
 
   private final Deque<T> mainStack;
   private final Deque<T> minStack;
