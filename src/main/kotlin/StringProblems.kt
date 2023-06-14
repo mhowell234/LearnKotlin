@@ -101,18 +101,18 @@ object StringProblems {
 
         val maxLength = inputs[0].length
 
-
         (0..maxLength).forEach { prefixLen ->
             val currentChar = inputs[0][prefixLen]
 
-            (1..inputs.size).forEach { i ->
-
-                if (prefixLen >= inputs[]) {
-                    return 1
+            (1 until inputs.size).forEach { i ->
+                if (prefixLen >= inputs[i].length) {
+                    return inputs[0].substring(0, prefixLen)
                 }
 
+                if (inputs[i][prefixLen] != currentChar) {
+                    return inputs[0].substring(0, prefixLen)
+                }
             }
-
         }
 
         return inputs[0][0].toString()
@@ -161,8 +161,10 @@ fun main() {
 
     println("joining: " + StringProblems.join('_', "A", "B", "C"))
 
-    val arr = arrayOf("1234", "3333333", "234", "abc", "99999")
+    val arr = arrayOf("111234", "1113333333", "111234", "111abc", "11199999")
     println("sortBy before: ${arr.contentToString()}")
     StringProblems.sortByLength(arr)
     println("sortBy after: ${arr.contentToString()}")
+    val longestCommonPrefix = StringProblems.longestCommonPrefix(arr.toList())
+    println("Longest Common Prefix: ${longestCommonPrefix}")
 }
